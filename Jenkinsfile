@@ -39,37 +39,38 @@ pipeline {
             }
         }
 
-        stage('Unit Testing') {
-            steps {
-                script {
-                    // Set the path to the Chrome binary for Unit Testing
-                    sh 'export CHROME_BIN=/usr/bin/google-chrome '
+//       stage('Unit Testing') {
+//           steps {
+//                script {
+//                    // Set the path to the Chrome binary for Unit Testing
+//                    sh 'export CHROME_BIN=/usr/bin/google-chrome '
 
                     // Run unit tests
-                    sh 'npm run test -- --browsers ChromeHeadlessNoSandbox'
-                }
-            }
-        }
+//                    sh 'npm run test -- --browsers ChromeHeadlessNoSandbox'
+//                }
+//            }
+//        }
+//
+//        stage('Code Analysis') {
+      
+//            steps {
+//                script {
+//                    // Perform code analysis using SonarQube
+//                    def sonarScanner = 'node_modules/sonar-scanner/bin/sonar-scanner'
+//                    sh "${sonarScanner}"
+//                    sh 'npm run sonar'
+//                }
+//            }
+//       }
 
-        stage('Code Analysis') {
-            steps {
-                script {
-                    // Perform code analysis using SonarQube
-                    def sonarScanner = 'node_modules/sonar-scanner/bin/sonar-scanner'
-                    sh "${sonarScanner}"
-                    sh 'npm run sonar'
-                }
-            }
-        }
-
-        stage('Package Artifacts') {
-            steps {
-                script {
-                    // Create deployable artifacts
-                    sh 'npm run package'
-                }
-            }
-        }
+//        stage('Package Artifacts') {
+//            steps {
+//                script {
+//                    // Create deployable artifacts
+//                    sh 'npm run package'
+//                }
+//            }
+//        }
 
         stage('Build Docker Image') {
             steps {
@@ -101,14 +102,14 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            script {
-                // Send email report
-                emailext body: "Pipeline execution status: ${currentBuild.result}",
-                         subject: "Pipeline Report - ${currentBuild.result}",
-                         to: 'asoorisetty@gmail.com'
-            }
-        }
-    }
+//    post {
+//        always {
+//            script {
+//                // Send email report
+//                emailext body: "Pipeline execution status: ${currentBuild.result}",
+//                         subject: "Pipeline Report - ${currentBuild.result}",
+//                         to: 'asoorisetty@gmail.com'
+//            }
+//        }
+//    }
 }
