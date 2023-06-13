@@ -10,7 +10,7 @@ pipeline {
 
         stage('Checkout from SCM') {
             steps {
-                git url: 'https://github.com/anandasaisoorisetty/webappanand.git', branch: 'main'
+                git url: 'https://github.com/kanumuripa/webappanand.git', branch: 'main'
             }
         }
 
@@ -76,7 +76,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image
-                    sh "docker build -t anandasaisoorisetty/webappanand:ANAND-PROJECT-${BUILD_NUMBER} ."
+                    sh "docker build -t pkkanumuri/webappanand:ANAND-PROJECT-${BUILD_NUMBER} ."
                 }
             }
         }
@@ -84,9 +84,9 @@ pipeline {
         stage('Docker Login and Push Image to Docker Hub') {
             steps {
                 withCredentials([string(credentialsId: 'Docker_Hub_PWD', variable: 'Docker_Hub_PWD')]) {
-                    sh "docker login -u anandasaisoorisetty -p ${Docker_Hub_PWD}"
+                    sh "docker login -u pkkanumuri -p ${Docker_Hub_PWD}"
                 }
-                sh "docker push anandasaisoorisetty/webappanand:ANAND-PROJECT-${BUILD_NUMBER}"
+                sh "docker push pkkanumuri/webappanand:ANAND-PROJECT-${BUILD_NUMBER}"
             }
         }
 
