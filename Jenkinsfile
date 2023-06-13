@@ -83,8 +83,8 @@ pipeline {
 
         stage('Docker Login and Push Image to Docker Hub') {
             steps {
-                withCredentials([string(credentialsId: 'Docker_Hub_PWD', variable: 'Docker_Hub_PWD')]) {
-                    sh "docker login -u pkkanumuri -p ${Docker_Hub_PWD}"
+                withCredentials([string(credentialsId: 'Docker_Hub_PWD1', variable: 'Docker_Hub_PWD1')]) {
+                    sh "docker login -u pkkanumuri -p ${Docker_Hub_PWD1}"
                 }
                 sh "docker push pkkanumuri/webappanand:ANAND-PROJECT-${BUILD_NUMBER}"
             }
